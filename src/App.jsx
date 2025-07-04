@@ -1,11 +1,15 @@
 import './App.css';
 import {useState} from 'react';
+import { Stack } from '@mui/material';
+import {Button} from '@mui/material';
+import {Box} from '@mui/material'
+
 
 function Square({value, onSquareClick}){
   return(
-    <button className='square' onClick={onSquareClick}>
+    <Button variant='outlined' sx={{height:'50px'}} onClick={onSquareClick}>
       {value}
-    </button>
+    </Button>
   );
 }
 
@@ -28,22 +32,31 @@ function Board({squares, xIsNext, onPlay}) {
   }
   return (
     <>
-      <div className='status'>{status}</div>
-      <div className='board-row'>
-        <Square value={squares[0]} onSquareClick={() => {handleClick(0)}} />
-        <Square value={squares[1]} onSquareClick={() => {handleClick(1)}} />
-        <Square value={squares[2]} onSquareClick={() => {handleClick(2)}} />
+      <div className='status'>
+        <Box sx={{
+          boxShadow: 1,
+          borderRadius: 2,
+          p: 2}}>
+            {status}
+        </Box>       
       </div>
-      <div className='board-row'>
-        <Square value={squares[3]} onSquareClick={() => {handleClick(3)}} />
-        <Square value={squares[4]} onSquareClick={() => {handleClick(4)}} />
-        <Square value={squares[5]} onSquareClick={() => {handleClick(5)}} />
-      </div>
-      <div className='board-row'>
-        <Square value={squares[6]} onSquareClick={() => {handleClick(6)}} />
-        <Square value={squares[7]} onSquareClick={() => {handleClick(7)}} />
-        <Square value={squares[8]} onSquareClick={() => {handleClick(8)}} />
-      </div>
+      <Stack direction={'column'} spacing={2}>
+        <Stack direction='row' spacing={2}>
+          <Square value={squares[0]} onSquareClick={() => {handleClick(0)}} />
+          <Square value={squares[1]} onSquareClick={() => {handleClick(1)}} />
+          <Square value={squares[2]} onSquareClick={() => {handleClick(2)}} />
+        </Stack>
+        <Stack direction='row' spacing={2}>
+          <Square value={squares[3]} onSquareClick={() => {handleClick(3)}} />
+          <Square value={squares[4]} onSquareClick={() => {handleClick(4)}} />
+          <Square value={squares[5]} onSquareClick={() => {handleClick(5)}} />
+        </Stack>
+        <Stack direction='row' spacing={2}>
+          <Square value={squares[6]} onSquareClick={() => {handleClick(6)}} />
+          <Square value={squares[7]} onSquareClick={() => {handleClick(7)}} />
+          <Square value={squares[8]} onSquareClick={() => {handleClick(8)}} />
+        </Stack>
+      </Stack>
     </>
   );
 }
@@ -75,11 +88,9 @@ export default function Game(){
     }
 
     return(
-      <li key={move}>
-        <button onClick={() => jumpTo(move)}>
-          {description}
-        </button>
-      </li>
+      <Button variant='contained' sx={{width:'200px'}} onClick={() => jumpTo(move)}>
+        {description}
+      </Button>
     );
   });
   return(
@@ -88,7 +99,7 @@ export default function Game(){
         <Board squares={currentSquares} xIsNext={xIsNext} onPlay={handlePlay}/>
       </div>
       <div className='game-info'>
-        <ol>{moves}</ol>
+        <Stack direction={'column'} spacing={2}>{moves}</Stack>
       </div>
     </div>
   );

@@ -80,11 +80,17 @@ body {
 .status {
   margin-bottom: 10px;
 }
+
 .game {
-  display: flex;
-  flex-direction: row;
+  position: absolute;
+  left: 50%;
+  top: 15%;
+  -webkit-transform: translate(-50%, -15%);
+  transform: translate(-50%, -15%);
 }
 
 .game-info {
-  margin-left: 20px;
+  position: absolute;
+  top: 0px;
+  left: 250px;
 }
